@@ -1,20 +1,17 @@
 FROM php:8.2-apache
 
-# Extensions PHP nécessaires
+# Extensions nécessaires
 RUN docker-php-ext-install pdo pdo_mysql
 
-# IMPORTANT : désactive TOUT MPM avant de forcer prefork
-RUN a2dismod mpm_event || true
-RUN a2dismod mpm_worker || true
-
-# force clean reload Apache modules
-RUN rm -f /etc/apache2/mods-enabled/mpm_*.load || true
-RUN a2enmod mpm_prefork
-
-# modules utiles API
+# Active rewrite (utile API)
 RUN a2enmod rewrite
 
-# copie projet
+# IMPORTANT : ne touche PAS aux MPM
+
+# copie du backend
 COPY . /var/www/html/
+
+# permissions propres
+RUN chown -R www-data:www-data /var/www/html
 
 EXPOSE 80
