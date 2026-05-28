@@ -7,7 +7,13 @@ function App() {
   React.useEffect(() => {
 
     fetch(`${API_URL}/api/destinations.php`)
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status}`);
+        }
+
+        return res.json();
+      })
       .then(data => setDestinations(data));
 
   }, []);
