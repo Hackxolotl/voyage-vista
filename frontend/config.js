@@ -1,4 +1,4 @@
-export const API_URL = "https://voyage-vista.up.railway.app";
+var API_URL =
   window.location.hostname === "localhost"
     ? "http://localhost:8000"
-    : "https://TON-BACKEND.up.railway.app";
+    : "https://voyage-vista-production.up.railway.app";
