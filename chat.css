@@ -114,3 +114,40 @@
   40% { transform: scale(1); opacity: 1; }
 }
 
+
+
+/* =========================
+   BOT MESSAGE MARKDOWN
+========================= */
+
+.bot-msg p {
+  margin: 0 0 10px;
+  line-height: 1.5;
+}
+
+.bot-msg ul,
+.bot-msg ol {
+  padding-left: 20px;
+  margin: 10px 0;
+}
+
+.bot-msg li {
+  margin-bottom: 6px;
+}
+
+.bot-msg strong {
+  font-weight: 700;
+}
+
+.bot-msg h1,
+.bot-msg h2,
+.bot-msg h3 {
+  margin: 12px 0 8px;
+}
+
+.bot-msg code {
+  background: #f4f4f4;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+}
