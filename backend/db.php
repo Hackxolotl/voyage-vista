@@ -1,13 +1,18 @@
 <?php
 
-try {
+header('Content-Type: application/json');
 
+$host = getenv('MYSQLHOST');
+$port = getenv('MYSQLPORT');
+$db   = getenv('MYSQLDATABASE');
+$user = getenv('MYSQLUSER');
+$pass = getenv('MYSQLPASSWORD');
+
+try {
     $pdo = new PDO(
-        "mysql:host=" . $_ENV["MYSQLHOST"] .
-        ";port=" . $_ENV["MYSQLPORT"] .
-        ";dbname=" . $_ENV["MYSQLDATABASE"],
-        $_ENV["MYSQLUSER"],
-        $_ENV["MYSQLPASSWORD"]
+        "mysql:host=$host;port=$port;dbname=$db;charset=utf8mb4",
+        $user,
+        $pass
     );
 
     echo json_encode([
@@ -15,8 +20,7 @@ try {
         "message" => "Database connected"
     ]);
 
-} catch(PDOException $e) {
-
+} catch (PDOException $e) {
     echo json_encode([
         "success" => false,
         "error" => $e->getMessage()
