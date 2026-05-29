@@ -69,3 +69,10 @@ async function sendMessage() {
     addMessage("Erreur serveur", "bot");
   }
 }
+
+document.getElementById("user-input").addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault(); // évite retour à la ligne / comportement bizarre
+    sendMessage();
+  }
+});
