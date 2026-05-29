@@ -27,6 +27,6 @@ if (!isset($_GET["key"]) || !$SECRET_KEY || $_GET["key"] !== $SECRET_KEY) {
 }
 
 /* 🚀 EXECUTION */
-runSQLFile($pdo, "../database/init.sql");
+runSQLFile($pdo, "init.sql");
 
 echo "✅ DONE";
