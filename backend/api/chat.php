@@ -1,8 +1,7 @@
 <?php
-header("Content-Type: text/event-stream");
-header("Cache-Control: no-cache");
-header("Connection: keep-alive");
+header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Content-Type");
 
 $input = json_decode(file_get_contents("php://input"), true);
 $message = $input["message"] ?? "";
@@ -10,7 +9,7 @@ $message = $input["message"] ?? "";
 $apiKey = getenv("GEMINI_API_KEY");
 $model  = getenv("GEMINI_MODEL") ?: "gemini-3.1-flash-lite-preview";
 
-$url = "https://generativelanguage.googleapis.com/v1beta/models/$model:streamGenerateContent?key=$apiKey";
+$url = "https://generativelanguage.googleapis.com/v1beta/models/$model:generateContent?key=$apiKey";
 
 $payload = [
   "contents" => [
@@ -22,25 +21,24 @@ $payload = [
   ]
 ];
 
-$ch = curl_init($url);
+$options = [
+  "http" => [
+    "header"  => "Content-Type: application/json",
+    "method"  => "POST",
+    "content" => json_encode($payload)
+  ]
+];
 
-curl_setopt($ch, CURLOPT_HTTPHEADER, [
-  "Content-Type: application/json"
+$context = stream_context_create($options);
+$response = file_get_contents($url, false, $context);
+
+if ($response === false) {
+  echo json_encode(["error" => "Gemini request failed"]);
+  exit;
+}
+
+$data = json_decode($response, true);
+
+echo json_encode([
+  "reply" => $data["candidates"][0]["content"]["parts"][0]["text"] ?? "No response"
 ]);
-
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
-curl_setopt($ch, CURLOPT_WRITEFUNCTION, function($ch, $chunk) {
-
-  // Gemini envoie du JSON chunké → on stream direct au frontend
-  echo "data: " . trim($chunk) . "\n\n";
-  ob_flush();
-  flush();
-
-  return strlen($chunk);
-});
-
-curl_exec($ch);
-curl_close($ch);
-
-echo "data: [DONE]\n\n";
