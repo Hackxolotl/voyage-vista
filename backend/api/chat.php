@@ -7,8 +7,9 @@ $input = json_decode(file_get_contents("php://input"), true);
 $message = $input["message"] ?? "";
 
 $apiKey = getenv("GEMINI_API_KEY");
-$model  = getenv("GEMINI_MODEL") ?: "gemini-3.1-flash-lite-preview";
+$model  = getenv("GEMINI_MODEL");
 
+/* 🔥 SYSTEM PROMPT EXTERNE */
 $systemPrompt = file_get_contents(__DIR__ . "../prompts/system_prompt.txt");
 
 $url = "https://generativelanguage.googleapis.com/v1beta/models/$model:generateContent?key=$apiKey";
