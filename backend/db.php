@@ -8,8 +8,6 @@ $db   = getenv('MYSQLDATABASE');
 $user = getenv('MYSQLUSER');
 $pass = getenv('MYSQLPASSWORD');
 
-var_dump(extension_loaded('pdo_mysql'));
-die();
 
 try {
     $pdo = new PDO(
