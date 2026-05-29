@@ -1,9 +1,9 @@
 <?php
 
-header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json");
 
 echo json_encode([
-  "success" => true,
-  "message" => "VoyageVista API OK"
+    "success" => true,
+    "message" => "Railway backend working"
 ]);
