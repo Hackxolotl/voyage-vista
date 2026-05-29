@@ -35,38 +35,66 @@ function addTyping() {
 }
 
 async function sendMessage() {
+
   const input = document.getElementById("user-input");
-  const text = input.value.trim();
+  const chatBox = document.getElementById("chat-box");
 
-  if (!text) return;
+  const message = input.value.trim();
 
-  // message user
-  addMessage(text, "user");
+  if (!message) return;
+
+  // ======================
+  // USER MESSAGE
+  // ======================
+
+  const userMsg = document.createElement("div");
+  userMsg.className = "user-msg";
+  userMsg.textContent = message;
+
+  chatBox.appendChild(userMsg);
+
   input.value = "";
 
-  // loader bot
-  const loader = addTyping();
+  // ======================
+  // API CALL
+  // ======================
 
   try {
-    const res = await fetch(API_URL, {
+
+    const response = await fetch("http://localhost/backend/chat.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ message: text })
+      body: JSON.stringify({
+        message: message
+      })
     });
 
-    const data = await res.json();
+    const data = await response.json();
 
-    // remove loader
-    loader.remove();
+    // ======================
+    // BOT MESSAGE
+    // ======================
 
-    // bot response
-    addMessage(data.reply || "Erreur API", "bot");
+    const botMsg = document.createElement("div");
+    botMsg.className = "bot-msg";
 
-  } catch (e) {
-    loader.remove();
-    addMessage("Erreur serveur", "bot");
+    // ✅ RENDU MARKDOWN
+    botMsg.innerHTML = marked.parse(data.reply);
+
+    chatBox.appendChild(botMsg);
+
+    // auto scroll
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+  } catch (err) {
+
+    const errorMsg = document.createElement("div");
+    errorMsg.className = "bot-msg";
+    errorMsg.textContent = "Erreur serveur.";
+
+    chatBox.appendChild(errorMsg);
   }
 }
 
