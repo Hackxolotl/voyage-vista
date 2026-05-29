@@ -54,3 +54,13 @@
   color: white;
   cursor: pointer;
 }
+
+
+.bot-msg::after {
+  content: "▋";
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
