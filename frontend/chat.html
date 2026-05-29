@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>VoyageVista - Chatbot</title>
+  <link href="index.css" rel="stylesheet">
+  <link href="chat.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="navbar">
+  <div class="logo">
+    <h1>Voyage<span>Vista</span></h1>
+  </div>
+
+  <nav>
+    <ul class="lien">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="chat.html">Chatbot</a></li>
+      <li><a href="../Connexion/connexion.html">Connexion</a></li>
+      <li><a href="../Inscription/inscription.html">Inscription</a></li>
+    </ul>
+  </nav>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-contenu">
+    <h2>Votre assistant VoyageVista</h2>
+    <p>Posez vos questions sur vos voyages, destinations et réservations.</p>
+  </div>
+</div>
+
+<!-- CHAT -->
+<main class="main-contenu">
+
+  <div class="chat-container">
+
+    <div id="chat-box" class="chat-box">
+      <div class="bot-msg">Bonjour 👋 Comment puis-je vous aider ?</div>
+    </div>
+
+    <div class="chat-input">
+      <input id="user-input" type="text" placeholder="Écrivez votre message..." />
+      <button onclick="sendMessage()">Envoyer</button>
+    </div>
+
+  </div>
+
+</main>
+
+<footer>
+  <small>© 2026 VoyageVista</small>
+</footer>
+
+<script src="chat.js"></script>
+</body>
+</html>
