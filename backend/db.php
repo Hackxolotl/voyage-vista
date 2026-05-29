@@ -1,22 +1,24 @@
 <?php
 
-$host = getenv("DB_HOST") ?: "db";
-$db   = getenv("DB_NAME") ?: "voyagevista";
-$user = getenv("DB_USER") ?: "user";
-$pass = getenv("DB_PASSWORD") ?: "password";
+$host = $_ENV["MYSQLHOST"];
+$port = $_ENV["MYSQLPORT"];
+$db   = $_ENV["MYSQLDATABASE"];
+$user = $_ENV["MYSQLUSER"];
+$pass = $_ENV["MYSQLPASSWORD"];
 
 try {
+    $pdo = new PDO(
+        "mysql:host=$host;port=$port;dbname=$db;charset=utf8",
+        $user,
+        $pass
+    );
 
-  $pdo = new PDO(
-    "mysql:host=$host;dbname=$db;charset=utf8",
-    $user,
-    $pass
-  );
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-} catch (Exception $e) {
+} catch(PDOException $e) {
 
-  die(json_encode([
-    "success" => false,
-    "error" => $e->getMessage()
-  ]));
+    die(json_encode([
+        "success" => false,
+        "error" => $e->getMessage()
+    ]));
 }
