@@ -1,22 +1,255 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-  <meta charset="UTF-8">
-  <title>VoyageVista</title>
-
-  <link rel="stylesheet" href="styles.css">
-
-  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-</head>
-
+  <meta charset="utf-8">
+  <title>VoyageVista - Agence de Voyage</title>
+  <link href="index.css" rel="stylesheet">
+</head> 
 <body>
 
-  <div id="root"></div>
+<div class="navbar">
+  <div class="logo">
+    <h1>Voyage<span>Vista</span></h1> 
+  </div>
+  <nav>
+    <ul class="lien">
+      <li><a href="index.html">Accueil</a></li>    
+      <li><a href="../Packages/packages.html">Packages</a></li>    
+      <li><a href="../Connexion/connexion.html">Connexion</a></li>    
+      <li><a href="../Inscription/inscription.html">Inscription</a></li>     
+	  <li><div class="notif-cloche">
+  <span class="cloche-icone">🔔</span>
+  <span class="notif-badge">3</span>
 
-  <script src="config.js"></script>
-  <script src="app.js"></script>
+  <!-- Menu déroulant -->
+  <div class="notif-dropdown">
+    <div class="notif-header">
+      <span>Notifications</span>
+      <button class="notif-tout-lire">Tout marquer comme lu</button>
+    </div>
 
+    <div class="notif-item non-lu">
+      <span class="notif-type-icone">✈️</span>
+      <div class="notif-contenu">
+        <p>Votre réservation pour Barcelone est confirmée !</p>
+        <span class="notif-date">Il y a 5 min</span>
+      </div>
+    </div>
+
+    <div class="notif-item non-lu">
+      <span class="notif-type-icone">👥</span>
+      <div class="notif-contenu">
+        <p>Lucas vous a ajouté au groupe "Voyage Bali 2026"</p>
+        <span class="notif-date">Il y a 1h</span>
+      </div>
+    </div>
+
+    <div class="notif-item non-lu">
+      <span class="notif-type-icone">💸</span>
+      <div class="notif-contenu">
+        <p>Sophie a ajouté une dépense de 45€ dans votre groupe</p>
+        <span class="notif-date">Il y a 2h</span>
+      </div>
+    </div>
+
+    <div class="notif-item">
+      <span class="notif-type-icone">🏷️</span>
+      <div class="notif-contenu">
+        <p>Promo -20% sur les séjours à Rome ce week-end !</p>
+        <span class="notif-date">Hier</span>
+      </div>
+    </div>
+
+    <div class="notif-footer">
+      <a href="notifications.html">Voir toutes les notifications</a>
+    </div>
+  </div>
+</div>
+</li>
+    </ul>
+  </nav>
+</div>
+
+<div class="hero">
+  <div class="hero-contenu">
+    <h2>Planifiez votre voyage de rêve</h2>
+    <p>Destinations exclusives, séjours sur mesure, expériences inoubliables.</p>
+
+    <div class="recherche-box">
+      <h3>Où voulez-vous partir ?</h3>
+      <div class="recherche-form">
+        <input type="text" placeholder="Destination (ex : Barcelone)" />
+        <input type="date" />
+        <input type="date" />
+        <select>
+          <option>1 voyageur</option>
+          <option>2 voyageurs</option>
+          <option>3 voyageurs</option>
+          <option>4+ voyageurs</option>
+        </select>
+        <button class="btn-action">Rechercher</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<main class="main-contenu">
+<div class="card">
+  <h2>Destinations populaires</h2>
+  <div class="destinations-grid">
+
+    <div class="destination-carte" data-categorie="plages ville">
+      <img src="images/Barcelone.jpg" alt="Barcelone">
+      <div class="destination-info">
+        <h3>Barcelone</h3>
+        <p>Espagne · Culture & Plages</p>
+        <span class="prix">À partir de 349 €</span>
+      </div>
+    </div>
+
+    <div class="destination-carte" data-categorie="culture ville">
+      <img src="images/Paris.jpg" alt="Paris">
+      <div class="destination-info">
+        <h3>Paris</h3>
+        <p>France · Romantique</p>
+        <span class="prix">À partir de 199 €</span>
+      </div>
+    </div>
+
+    <div class="destination-carte" data-categorie="culture ville">
+      <img src="images/Rome.jpg" alt="Rome">
+      <div class="destination-info">
+        <h3>Rome</h3>
+        <p>Italie · Histoire & Gastronomie</p>
+        <span class="prix">À partir de 279 €</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="card banniere-etudiants">
+  <div class="banniere-texte">
+    <span class="badge-etudiant">🎓 Spécial étudiants</span>
+    <h2>Partez à plusieurs, sans prise de tête</h2>
+    <p>Créez un groupe, invitez vos amis, partagez les dépenses automatiquement. VoyageVista s'occupe du reste.</p>
+    <button class="btn-action">Créer un groupe</button>
+  </div>
+  <div class="banniere-stats">
+    <div class="stat">
+      <span class="stat-nombre">0 €</span>
+      <span class="stat-label">de frais cachés</span>
+    </div>
+    <div class="stat">
+      <span class="stat-nombre">∞</span>
+      <span class="stat-label">amis invitables</span>
+    </div>
+    <div class="stat">
+      <span class="stat-nombre">Auto</span>
+      <span class="stat-label">calcul des dépenses</span>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <h2>Voyagez par envie</h2>
+  <div class="categories-section">
+
+    <!-- Colonne gauche : catégories -->
+    <div class="categories">
+      <div class="categorie active" data-cat="plages">🏖️ <span>Plages</span></div>
+      <div class="categorie" data-cat="montagnes">🏔️ <span>Montagnes</span></div>
+      <div class="categorie" data-cat="villes">🏙️ <span>Villes</span></div>
+      <div class="categorie" data-cat="culture">🏛️ <span>Culture</span></div>
+      <div class="categorie" data-cat="aventure">🧗 <span>Aventure</span></div>
+    </div>
+
+    <!-- Zone droite : destinations correspondantes -->
+    <div class="destinations-filtrees">
+        <div class="destinations-grid">
+
+          <div class="destination-carte" data-categorie="plages">
+            <img src="images/Bali.jpg" alt="Bali">
+            <div class="destination-info">
+              <h3>Bali</h3>
+              <p>Indonésie · Plages & Détente</p>
+              <span class="prix">À partir de 870 €</span>
+            </div>
+          </div>
+
+          <div class="destination-carte" data-categorie="plages villes">
+            <img src="images/Barcelone.jpg" alt="Barcelone">
+            <div class="destination-info">
+              <h3>Barcelone</h3>
+              <p>Espagne · Plages & Culture</p>
+              <span class="prix">À partir de 140 €</span>
+            </div>
+          </div>
+
+          <!-- Ajoute d'autres destinations pour les autres catégories -->
+          <div class="destination-carte" data-categorie="culture villes">
+            <img src="images/Paris.jpg" alt="Paris">
+            <div class="destination-info">
+              <h3>Paris</h3>
+              <p>France · Romantique</p>
+              <span class="prix">À partir de 80 €</span>
+            </div>
+          </div>
+
+          <div class="destination-carte" data-categorie="culture villes">
+            <img src="images/Rome.jpg" alt="Rome">
+            <div class="destination-info">
+              <h3>Rome</h3>
+              <p>Italie · Histoire & Gastronomie</p>
+              <span class="prix">À partir de 179 €</span>
+            </div>
+          </div>
+
+          <div class="destination-carte" data-categorie="montagnes aventure">
+            <img src="images/Alpes.jpg" alt="Alpes">
+            <div class="destination-info">
+              <h3>Alpes</h3>
+              <p>France · Ski & Randonnée</p>
+              <span class="prix">À partir de 275 €</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  </div>
+</div>
+<div class="card">
+  <h2>Ce que disent nos voyageurs</h2>
+  <div class="avis-grid">
+
+    <div class="avis">
+      <div class="etoiles">★★★★★</div>
+      <blockquote>"Un séjour parfaitement organisé, nous avons adoré chaque instant à Rome. Je recommande vivement !"</blockquote>
+      <span class="avis-auteur">— Sophie M., Paris</span>
+    </div>
+
+    <div class="avis">
+      <div class="etoiles">★★★★★</div>
+      <blockquote>"La plateforme est super intuitive, j'ai trouvé et réservé mon voyage en moins de 10 minutes."</blockquote>
+      <span class="avis-auteur">— Lucas D., Lyon</span>
+    </div>
+
+    <div class="avis">
+      <div class="etoiles">★★★★☆</div>
+      <blockquote>"Très bon choix de destinations, des activités variées. Je reviendrai pour mon prochain voyage !"</blockquote>
+      <span class="avis-auteur">— Camille R., Bordeaux</span>
+    </div>
+
+  </div>
+</div>
+</main>
+
+<footer>
+  <small>Copyright | © 2026, VoyageVista, Paris - Gosselin Loane · Brusset Anne-Laure · Salabet Eléonore · Picard Arthur</small>
+</footer>
+<script src="index.js"></script>
 </body>
 </html>
