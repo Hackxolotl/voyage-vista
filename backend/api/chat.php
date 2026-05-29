@@ -9,13 +9,16 @@ $message = $input["message"] ?? "";
 $apiKey = getenv("GEMINI_API_KEY");
 $model  = getenv("GEMINI_MODEL") ?: "gemini-3.1-flash-lite-preview";
 
+/* 🔥 SYSTEM PROMPT EXTERNE */
+$systemPrompt = file_get_contents(__DIR__ . "../prompts/system_prompt.txt");
+
 $url = "https://generativelanguage.googleapis.com/v1beta/models/$model:generateContent?key=$apiKey";
 
 $payload = [
   "contents" => [
     [
       "parts" => [
-        ["text" => $message]
+        ["text" => $systemPrompt . "\n\nUtilisateur: " . $message]
       ]
     ]
   ]
@@ -29,16 +32,9 @@ $options = [
   ]
 ];
 
-$context = stream_context_create($options);
-$response = file_get_contents($url, false, $context);
-
-if ($response === false) {
-  echo json_encode(["error" => "Gemini request failed"]);
-  exit;
-}
-
+$response = file_get_contents($url, false, stream_context_create($options));
 $data = json_decode($response, true);
 
 echo json_encode([
-  "reply" => $data["candidates"][0]["content"]["parts"][0]["text"] ?? "No response"
+  "reply" => $data["candidates"][0]["content"]["parts"][0]["text"] ?? "Erreur API"
 ]);
