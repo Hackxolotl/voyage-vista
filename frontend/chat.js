@@ -61,7 +61,7 @@ async function sendMessage() {
 
   try {
 
-    const response = await fetch("http://localhost/backend/chat.php", {
+    const response = await fetch(API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
