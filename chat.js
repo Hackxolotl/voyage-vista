@@ -58,7 +58,7 @@ async function sendMessage() {
   // ======================
   // API CALL
   // ======================
-
+  const typing = addTyping();
   try {
 
     const response = await fetch(API_URL, {
@@ -72,7 +72,9 @@ async function sendMessage() {
     });
 
     const data = await response.json();
+    typing.remove();
 
+    
     // ======================
     // BOT MESSAGE
     // ======================
