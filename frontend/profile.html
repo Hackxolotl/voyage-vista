@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Profil</title>
+</head>
+<body>
+
+    <h1>Profil utilisateur</h1>
+
+    <pre id="profile"></pre>
+
+    <button id="logout">
+        Déconnexion
+    </button>
+
+    <script>
+
+        const token =
+            localStorage.getItem("token");
+
+        async function loadProfile() {
+
+            const response =
+                await fetch(
+                    "https://voyage-vista-production.up.railway.app/api/me.php",
+                    {
+                        headers: {
+                            Authorization:
+                                `Bearer ${token}`
+                        }
+                    }
+                );
+
+            const data =
+                await response.json();
+
+            document
+                .getElementById("profile")
+                .textContent =
+                    JSON.stringify(
+                        data,
+                        null,
+                        2
+                    );
+        }
+
+        loadProfile();
+
+        document
+            .getElementById("logout")
+            .addEventListener(
+                "click",
+                () => {
+
+                    localStorage.removeItem(
+                        "token"
+                    );
+
+                    localStorage.removeItem(
+                        "user"
+                    );
+
+                    location.href =
+                        "login.html";
+                }
+            );
+
+    </script>
+
+</body>
+</html>
