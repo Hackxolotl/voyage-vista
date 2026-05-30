@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS packages;
+DROP TABLE IF EXISTS utilisateurs;
 
 CREATE TABLE packages (
     id_packages INT AUTO_INCREMENT PRIMARY KEY,
@@ -13,6 +14,26 @@ CREATE TABLE packages (
     rating DECIMAL(3,1),
     reviews INT,
     participants INT
+);
+
+CREATE TABLE utilisateurs (
+    id_utilisateur INT AUTO_INCREMENT PRIMARY KEY,
+
+    nom VARCHAR(50) NOT NULL,
+    prenom VARCHAR(50) NOT NULL,
+
+    email VARCHAR(100) NOT NULL UNIQUE,
+    mot_de_passe VARCHAR(255) NOT NULL,
+
+    role ENUM(
+        'user',
+        'prestataire',
+        'admin'
+    ) DEFAULT 'user',
+
+    est_etudiant BOOLEAN DEFAULT FALSE,
+
+    date_inscription TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 INSERT INTO packages (nom, img_url, region, country, price, descriptions, duration, nbNuits, rating, reviews, participants) VALUES
