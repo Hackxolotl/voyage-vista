@@ -16,14 +16,18 @@ try {
         $pass
     );
 
+    /*
     echo json_encode([
         "success" => true,
         "message" => "Database connected"
     ]);
+    */
 
 } catch (PDOException $e) {
+    /*
     echo json_encode([
         "success" => false,
         "error" => $e->getMessage()
     ]);
+    */
 }
