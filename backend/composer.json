@@ -2,6 +2,6 @@
   "require": {
     "ext-pdo": "*",
     "ext-pdo_mysql": "*",
-    "firebase/php-jwt": "^6.11"
+    "firebase/php-jwt": "^7.0.5"
   }
 }
