@@ -1,11 +1,8 @@
 <?php
-require "../db/db.php";
-
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
-header("Content-Type: application/json");
-header("Content-Type: application/json");
+header("Content-Type: application/json; charset=UTF-8");
+
+require "../db/db.php";
 
 try {
     $stmt = $pdo->query("SELECT * FROM packages");
@@ -13,12 +10,17 @@ try {
 
     echo json_encode([
         "success" => true,
+        "message" => "Database connected",
         "data" => $packages
     ]);
 
-} catch (Exception $e) {
+} catch (Throwable $e) {
+    http_response_code(500);
+
     echo json_encode([
         "success" => false,
         "error" => $e->getMessage()
     ]);
 }
+
+exit;
