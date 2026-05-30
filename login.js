@@ -1,40 +1,72 @@
 const API =
   "https://voyage-vista-production.up.railway.app";
 
-async function login(email, password) {
+const form =
+  document.getElementById("loginForm");
 
-  const response = await fetch(
-    `${API}/api/login.php`,
-    {
-      method: "POST",
+const message =
+  document.getElementById("message");
 
-      headers: {
-        "Content-Type":
-          "application/json"
-      },
+form.addEventListener(
+  "submit",
+  async (e) => {
 
-      body: JSON.stringify({
-        email,
-        password
-      })
+    e.preventDefault();
+
+    const email =
+      document.getElementById("email").value;
+
+    const password =
+      document.getElementById("password").value;
+
+    try {
+
+      const response =
+        await fetch(
+          `${API}/api/login.php`,
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json"
+            },
+
+            body: JSON.stringify({
+              email,
+              password
+            })
+          }
+        );
+
+      const data =
+        await response.json();
+
+      if (data.success) {
+
+        localStorage.setItem(
+          "token",
+          data.token
+        );
+
+        localStorage.setItem(
+          "user",
+          JSON.stringify(data.user)
+        );
+
+        message.textContent =
+          "Connexion réussie";
+
+      } else {
+
+        message.textContent =
+          data.message;
+      }
+
+    } catch (error) {
+
+      message.textContent =
+        "Erreur serveur";
     }
-  );
-
-  const data =
-    await response.json();
-
-  if (data.success) {
-
-    localStorage.setItem(
-      "token",
-      data.token
-    );
-
-    localStorage.setItem(
-      "user",
-      JSON.stringify(data.user)
-    );
   }
-
-  return data;
-}
+);
